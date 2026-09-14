@@ -4,8 +4,10 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: caksoylar
       url-base: https://github.com/caksoylar
-    - name: sekigon-gonnoc  # PAW3222
+    - name: sekigon-gonnoc  # PAW3222（上流）
       url-base: https://github.com/sekigon-gonnoc
+    - name: Dambara0419  # PAW3222 のフォーク（ポーリング間隔を設定可能にしたもの）
+      url-base: https://github.com/Dambara0419
     - name: cormoran
       url-base: https://github.com/cormoran
     - name: imo00o
@@ -18,9 +20,11 @@ manifest:
       remote: cormoran
       revision: v0.3-branch+dya
       import: app/west.yml
+    # 上流 sekigon-gonnoc/main は移動中の読み取り間隔が 15ms 固定。
+    # フォークの poll-interval ブランチで CONFIG_PAW3222_POLL_INTERVAL_MS を追加している。
     - name: zmk-driver-paw3222
-      remote: sekigon-gonnoc
-      revision: main
+      remote: Dambara0419
+      revision: poll-interval
     - name: zmk-rgbled-widget
       remote: caksoylar
       revision: v0.3.0
