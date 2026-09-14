@@ -24,9 +24,9 @@
     require-prior-idle-ms = <400>;
     // AMLから離脱しないキー
     excluded-positions = <
-        6 // U 左クリック
-        7 // I 右クリック
-        8 // O 中央クリック
+        5 // Y 左クリック
+        6 // U マウスボタン
+        7 // I マウスボタン
         20 // Z Shift
         30 // Control
         32 // Alt
