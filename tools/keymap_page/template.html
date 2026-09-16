@@ -1,0 +1,448 @@
+<title>FrostOrtho キーマップ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#EEF3F7; --surface:#FFFFFF; --key:#F7FAFC; --key-edge:#C3D1DD; --key-shade:#B4C5D2;
+  --ink:#172532; --muted:#5B6F82; --line:#D5DFE8; --line-strong:#B9C8D4;
+  --accent:#1F6E8C; --accent-soft:#D6EAF2; --accent-ink:#0E4459;
+  --note:#B8701C; --note-soft:#F8E8D0; --note-ink:#6B3F08;
+  --trans-ink:#98ABBB; --danger:#A33A3A; --ok:#2E7D57;
+  --shadow:0 1px 0 var(--key-shade), 0 2px 6px rgba(23,37,50,.08);
+  --font:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E161D; --surface:#151F27; --key:#1A2733; --key-edge:#2B3D4B; --key-shade:#0A1116;
+    --ink:#E4ECF2; --muted:#91A5B6; --line:#263542; --line-strong:#35485A;
+    --accent:#63BEDD; --accent-soft:#143847; --accent-ink:#BFE6F3;
+    --note:#E3A650; --note-soft:#3A2A12; --note-ink:#F5D9A8;
+    --trans-ink:#5E7383; --danger:#E08383; --ok:#7BC9A2;
+    --shadow:0 1px 0 var(--key-shade), 0 2px 8px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E161D; --surface:#151F27; --key:#1A2733; --key-edge:#2B3D4B; --key-shade:#0A1116;
+  --ink:#E4ECF2; --muted:#91A5B6; --line:#263542; --line-strong:#35485A;
+  --accent:#63BEDD; --accent-soft:#143847; --accent-ink:#BFE6F3;
+  --note:#E3A650; --note-soft:#3A2A12; --note-ink:#F5D9A8;
+  --trans-ink:#5E7383; --danger:#E08383; --ok:#7BC9A2;
+  --shadow:0 1px 0 var(--key-shade), 0 2px 8px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-block:20px 48px;padding-inline:20px}
+h1,h2,h3{margin:0;text-wrap:balance;font-weight:700}
+h1{font-size:22px;letter-spacing:.01em}
+h2{font-size:13px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+code,.mono{font-family:var(--mono);font-size:.92em}
+button{font:inherit;color:inherit}
+button:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between;margin-bottom:14px}
+.top .sub{margin:4px 0 0;color:var(--muted);font-size:13px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--muted);align-items:center}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border-radius:3px;border:1px solid var(--key-edge);background:var(--key)}
+.sw.edit{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent)}
+.sw.note{position:relative}
+.sw.note::after{content:"";position:absolute;right:2px;top:2px;width:5px;height:5px;border-radius:50%;background:var(--note)}
+.sw.trans{color:var(--trans-ink);font-size:10px;display:inline-flex;align-items:center;justify-content:center}
+.banner{display:none;margin:0 0 12px;padding:8px 12px;border-radius:6px;background:var(--note-soft);color:var(--note-ink);font-size:13px}
+.banner.show{display:block}
+
+/* tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tab{display:flex;align-items:center;gap:8px;padding:7px 12px 7px 9px;border:1px solid var(--line-strong);background:var(--surface);border-radius:8px;cursor:pointer;font-size:13px;line-height:1.2}
+.tab .n{font-family:var(--mono);font-size:12px;color:var(--muted);min-width:1.2em;text-align:center}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .tab[aria-selected="true"]{color:#0B1A22}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#0B1A22}}
+.tab[aria-selected="true"] .n{color:inherit;opacity:.8}
+.tab .badge{font-family:var(--mono);font-size:11px;padding:1px 6px;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink)}
+.tab[aria-selected="true"] .badge{background:rgba(255,255,255,.28);color:inherit}
+
+/* main layout */
+.main{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:20px;align-items:start}
+@media (max-width:980px){.main{grid-template-columns:1fr}}
+.board{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.board-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;align-items:baseline;margin-bottom:12px}
+.board-head h2{color:var(--ink);text-transform:none;letter-spacing:0;font-size:16px;font-weight:700}
+.board-head p{margin:0;color:var(--muted);font-size:13px;max-width:60ch}
+.board-scroll{overflow-x:auto;padding-bottom:6px}
+.grid{display:grid;grid-template-columns:repeat(6,minmax(48px,1fr)) minmax(18px,.55fr) repeat(5,minmax(48px,1fr));grid-auto-rows:auto;gap:7px;min-width:640px}
+.key{position:relative;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px 3px;border:1px solid var(--key-edge);border-radius:8px;background:var(--key);box-shadow:var(--shadow);cursor:pointer;text-align:center;transition:transform .08s ease,box-shadow .08s ease}
+.key:hover{transform:translateY(-1px)}
+.key:active{transform:translateY(1px);box-shadow:0 0 0 var(--key-shade)}
+.key .tap{font-weight:700;font-size:15px;line-height:1.1;max-width:100%;overflow-wrap:anywhere}
+.key .tap.small{font-size:12px}
+.key .tap.tiny{font-size:10.5px;font-weight:500}
+.key .hold{font-size:10px;line-height:1;color:var(--muted);padding:2px 5px;border-radius:999px;background:var(--bg);white-space:nowrap}
+.key .old{font-size:9.5px;color:var(--muted);text-decoration:line-through;line-height:1}
+.key.trans{color:var(--trans-ink);box-shadow:none;background:transparent;border-style:dashed}
+.key.trans .tap{font-weight:400;font-size:13px}
+.key.none{background:transparent;box-shadow:none;border-color:var(--line)}
+.key.edited{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 0 0 1px var(--accent),var(--shadow)}
+.key.edited .tap{color:var(--accent-ink)}
+.key.noted::after{content:"";position:absolute;right:5px;top:5px;width:7px;height:7px;border-radius:50%;background:var(--note)}
+.key.sel{outline:3px solid var(--accent);outline-offset:1px}
+.key .aml{position:absolute;left:4px;bottom:3px;font-size:8.5px;color:var(--muted);letter-spacing:.04em}
+.key .idx{position:absolute;left:5px;top:3px;font-family:var(--mono);font-size:8.5px;color:var(--muted);opacity:.7}
+.encoder{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;font-size:13px;color:var(--muted)}
+.encoder b{color:var(--ink);font-weight:500}
+.encoder .knob{width:18px;height:18px;border-radius:50%;border:2px solid var(--line-strong);position:relative;flex:none}
+.encoder .knob::after{content:"";position:absolute;left:50%;top:1px;width:2px;height:6px;background:var(--line-strong);transform:translateX(-50%)}
+
+/* panel */
+.panel{display:flex;flex-direction:column;gap:14px;position:sticky;top:12px}
+@media (max-width:980px){.panel{position:static}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.card h2{margin-bottom:10px}
+.editor .empty{color:var(--muted);font-size:13px;margin:0}
+.editor .where{font-size:12px;color:var(--muted);margin:0 0 6px}
+.editor .cur{display:flex;align-items:center;gap:12px;margin:0 0 10px;padding:10px 12px;border-radius:8px;background:var(--bg)}
+.editor .cur .big{font-weight:700;font-size:22px;line-height:1;min-width:1.5em;text-align:center}
+.editor .cur .exp{font-size:12.5px;color:var(--muted);margin:0}
+.editor .cur code{display:block;font-size:12px;color:var(--ink)}
+label.f{display:block;font-size:12px;color:var(--muted);margin:10px 0 4px}
+.editor input,.editor textarea,.general textarea{width:100%;padding:8px 10px;border:1px solid var(--line-strong);border-radius:6px;background:var(--surface);color:var(--ink);font-family:var(--font);font-size:14px}
+.editor input{font-family:var(--mono);font-size:13.5px}
+.editor textarea{min-height:66px;resize:vertical;line-height:1.5}
+.general textarea{min-height:96px;resize:vertical;line-height:1.5}
+.chips-wrap{margin-top:6px}
+.chips-wrap summary{font-size:12px;color:var(--accent-ink);cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:4px}
+.chips-wrap summary::-webkit-details-marker{display:none}
+.chips-wrap summary::before{content:"▸";font-size:11px;transition:transform .12s}
+.chips-wrap[open] summary::before{transform:rotate(90deg)}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;max-height:220px;overflow:auto;padding-right:4px}
+.chip{padding:3px 8px;border:1px solid var(--line-strong);border-radius:999px;background:var(--surface);font-size:12px;cursor:pointer;line-height:1.3}
+.chip:hover{border-color:var(--accent);color:var(--accent-ink);background:var(--accent-soft)}
+.chip.grp{border:none;background:none;color:var(--muted);padding-left:0;cursor:default;font-size:11.5px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.btn{padding:7px 14px;border-radius:7px;border:1px solid var(--line-strong);background:var(--surface);cursor:pointer;font-size:13.5px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+:root[data-theme="dark"] .btn.primary{color:#0B1A22}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.primary{color:#0B1A22}}
+.btn.quiet{border-color:transparent;color:var(--muted)}
+.btn.danger{color:var(--danger)}
+.btn:disabled{opacity:.5;cursor:default}
+.status{font-size:12px;color:var(--muted);margin-left:auto}
+.status.ok{color:var(--ok)}
+.status.err{color:var(--danger)}
+.hint{font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.5}
+
+.changes ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.changes li{display:grid;grid-template-columns:auto 1fr auto;gap:8px 10px;align-items:start;padding:8px 10px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--surface)}
+.changes li:hover{border-color:var(--accent)}
+.changes li.applied{opacity:.6}
+.changes .pos{font-family:var(--mono);font-size:11.5px;color:var(--muted);padding-top:2px;white-space:nowrap}
+.changes .what{font-size:13px;min-width:0;overflow-wrap:anywhere}
+.changes .what code{color:var(--accent-ink);font-weight:500}
+.changes .what .n{display:block;color:var(--note-ink);font-size:12px}
+.changes .pill{font-size:10.5px;padding:2px 7px;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink);white-space:nowrap}
+.changes li.applied .pill{background:var(--bg);color:var(--muted)}
+.changes .none{color:var(--muted);font-size:13px;margin:0}
+.changes pre{margin:10px 0 0;padding:10px;background:var(--bg);border-radius:6px;font-family:var(--mono);font-size:11.5px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:260px;overflow:auto}
+.foot{margin-top:18px;font-size:12px;color:var(--muted);line-height:1.6}
+.foot code{color:var(--ink)}
+@media (prefers-reduced-motion: reduce){.key{transition:none}.key:hover{transform:none}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>FrostOrtho キーマップ</h1>
+      <p class="sub" id="sub"></p>
+    </div>
+    <div class="legend" aria-label="凡例">
+      <span><i class="sw edit"></i>変更あり</span>
+      <span><i class="sw note"></i>メモあり</span>
+      <span><i class="sw trans">▽</i>下のレイヤーを透過</span>
+      <span><i class="sw" style="font-size:9px;display:inline-flex;align-items:center;justify-content:center">AML</i>マウスレイヤーを維持するキー</span>
+    </div>
+  </header>
+  <p class="banner" id="banner"></p>
+
+  <nav class="tabs" id="tabs" role="tablist" aria-label="レイヤー"></nav>
+
+  <div class="main">
+    <section class="board" aria-live="polite">
+      <div class="board-head">
+        <h2 id="layerTitle"></h2>
+        <p id="layerDesc"></p>
+      </div>
+      <div class="board-scroll"><div class="grid" id="grid" role="group" aria-label="キー配列"></div></div>
+      <div class="encoder"><i class="knob" aria-hidden="true"></i><span>左手のエンコーダー（時計回り / 反時計回り）: <b id="encoder"></b></span></div>
+    </section>
+
+    <aside class="panel">
+      <div class="card editor" id="editor">
+        <h2>キーの変更</h2>
+        <p class="empty">左の配列からキーを押すと、ここで割り当てを変えられます。<br>ZMKの書き方が分からなくても、メモ欄に日本語で「こうしたい」を書いておけばこちらで直します。</p>
+      </div>
+      <div class="card changes" id="changes">
+        <h2>変更リスト</h2>
+        <p class="none">まだ変更はありません。</p>
+      </div>
+      <div class="card general">
+        <h2>全体のメモ</h2>
+        <textarea id="general" placeholder="キー単位ではない要望はここに。例:「レイヤー5は使っていないので消したい」「Cmd+C/Cmd+Vのマクロが欲しい」"></textarea>
+        <div class="actions"><button class="btn primary" id="generalSave">メモを保存</button><span class="status" id="generalStatus"></span></div>
+      </div>
+    </aside>
+  </div>
+
+  <p class="foot" id="foot"></p>
+</div>
+
+<script>
+const DATA = __KEYMAP_JSON__;
+
+/* ---------- ラベル変換（JIS配列 / Mac表記） ---------- */
+const MODSYM = {LS:"⇧",RS:"⇧",LC:"⌃",RC:"⌃",LA:"⌥",RA:"⌥",LG:"⌘",RG:"⌘"};
+const ALIAS = {NUMBER_0:"N0",NUMBER_1:"N1",NUMBER_2:"N2",NUMBER_3:"N3",NUMBER_4:"N4",NUMBER_5:"N5",NUMBER_6:"N6",NUMBER_7:"N7",NUMBER_8:"N8",NUMBER_9:"N9",
+  LBKT:"LEFT_BRACKET",RBKT:"RIGHT_BRACKET",BSLH:"BACKSLASH",SEMI:"SEMICOLON",SINGLE_QUOTE:"SQT",APOS:"SQT",DOT:"PERIOD",FSLH:"SLASH",INT1:"INTERNATIONAL_1",INT_RO:"INTERNATIONAL_1",
+  LANG_HANJA:"LANG2",LANG_HANGEUL:"LANG1",KP_ENTER:"ENTER",RET:"ENTER",BSPC:"BACKSPACE",DEL:"DELETE",INS:"INSERT",ESC:"ESCAPE",PG_UP:"PAGE_UP",PG_DN:"PAGE_DOWN",
+  UP:"UP_ARROW",DOWN:"DOWN_ARROW",LEFT:"LEFT_ARROW",RIGHT:"RIGHT_ARROW",
+  LSHIFT:"LEFT_SHIFT",LSHFT:"LEFT_SHIFT",RSHIFT:"RIGHT_SHIFT",RSHFT:"RIGHT_SHIFT",LCTRL:"LEFT_CONTROL",RCTRL:"RIGHT_CONTROL",LALT:"LEFT_ALT",RALT:"RIGHT_ALT",
+  LGUI:"LEFT_WIN",LWIN:"LEFT_WIN",LEFT_GUI:"LEFT_WIN",LEFT_COMMAND:"LEFT_WIN",LCMD:"LEFT_WIN",RGUI:"RIGHT_WIN",RWIN:"RIGHT_WIN",RIGHT_GUI:"RIGHT_WIN",RCMD:"RIGHT_WIN",
+  C_VOLUME_UP:"C_VOL_UP",C_VOLUME_DOWN:"C_VOL_DN",C_PLAY_PAUSE:"C_PP",C_BRIGHTNESS_INC:"C_BRI_UP",C_BRIGHTNESS_DEC:"C_BRI_DN",CAPS:"CAPSLOCK",PSCRN:"PRINTSCREEN",SPC:"SPACE"};
+const LABEL = {MINUS:"-",EQUAL:"^",LEFT_BRACKET:"@",RIGHT_BRACKET:"[",BACKSLASH:"]",SEMICOLON:";",SQT:":",GRAVE:"半/全",COMMA:",",PERIOD:".",SLASH:"/",INT_YEN:"¥",INTERNATIONAL_1:"＼",
+  LANG1:"かな",LANG2:"英数",SPACE:"Space",ENTER:"Enter",ESCAPE:"Esc",TAB:"Tab",BACKSPACE:"BS",DELETE:"Del",INSERT:"Ins",HOME:"Home",END:"End",PAGE_UP:"PgUp",PAGE_DOWN:"PgDn",
+  UP_ARROW:"↑",DOWN_ARROW:"↓",LEFT_ARROW:"←",RIGHT_ARROW:"→",LEFT_SHIFT:"⇧",RIGHT_SHIFT:"⇧",LEFT_CONTROL:"⌃",RIGHT_CONTROL:"⌃",LEFT_ALT:"⌥",RIGHT_ALT:"⌥",LEFT_WIN:"⌘",RIGHT_WIN:"⌘",
+  C_VOL_UP:"音量+",C_VOL_DN:"音量-",C_MUTE:"消音",C_PP:"再生/停止",C_NEXT:"次曲",C_PREV:"前曲",C_BRI_UP:"輝度+",C_BRI_DN:"輝度-",CAPSLOCK:"Caps",PRINTSCREEN:"PrtSc",K_APP:"Menu"};
+const SHIFT_JIS = {N1:"!",N2:"\"",N3:"#",N4:"$",N5:"%",N6:"&",N7:"'",N8:"(",N9:")",N0:"0",MINUS:"=",EQUAL:"~",LEFT_BRACKET:"`",RIGHT_BRACKET:"{",BACKSLASH:"}",SEMICOLON:"+",SQT:"*",COMMA:"<",PERIOD:">",SLASH:"?",INT_YEN:"|",INTERNATIONAL_1:"_"};
+const MODNAME = {LEFT_SHIFT:"Shift",RIGHT_SHIFT:"Shift",LEFT_CONTROL:"Control",RIGHT_CONTROL:"Control",LEFT_ALT:"Option(Alt)",RIGHT_ALT:"Option(Alt)",LEFT_WIN:"Command(Win)",RIGHT_WIN:"Command(Win)"};
+const MB = {MB1:"左クリック",MB2:"右クリック",MB3:"中クリック",MB4:"戻る",MB5:"進む",LCLK:"左クリック",RCLK:"右クリック",MCLK:"中クリック"};
+const SCRL = {SCRL_UP:"↑スクロール",SCRL_DOWN:"↓スクロール",SCRL_LEFT:"←スクロール",SCRL_RIGHT:"→スクロール"};
+const MACRO_JA = {screenshot:"スクショ",to_layer_0:"L0へ",q_jp:"?（半角）",excl_jp:"!（半角）",kana_on:"かな",eisu_off:"英数"};
+
+function norm(code){ return ALIAS[code] || code; }
+function keyLabel(code, plain){
+  const m = /^([LR][SCAG])\((.+)\)$/.exec(code);
+  if (m){
+    const inner = norm(m[2]);
+    if ((m[1]==="LS" || m[1]==="RS") && !plain){ if (SHIFT_JIS[inner]) return SHIFT_JIS[inner]; }
+    return MODSYM[m[1]] + keyLabel(inner, true);
+  }
+  const c = norm(code);
+  if (LABEL[c]) return LABEL[c];
+  if (/^N\d$/.test(c)) return c.slice(1);
+  if (/^F\d{1,2}$/.test(c)) return c;
+  if (/^[A-Z]$/.test(c)) return c;
+  if (/^KP_/.test(c)) return "テンキー"+c.slice(3);
+  return c.replace(/_/g," ").toLowerCase();
+}
+function keyExplain(code){
+  const m = /^([LR][SCAG])\((.+)\)$/.exec(code);
+  if (m){
+    const inner = norm(m[2]);
+    if ((m[1]==="LS"||m[1]==="RS") && SHIFT_JIS[inner]) return `Shift+${keyLabel(inner)} = 「${SHIFT_JIS[inner]}」（JIS）`;
+    return `${MODSYM[m[1]]}+${keyLabel(inner)}`;
+  }
+  const c = norm(code);
+  if (MODNAME[c]) return MODNAME[c];
+  const l = keyLabel(c);
+  return l === c ? c : `${l}（${c}）`;
+}
+function describe(b){
+  const t = b.replace(/^&/,"").trim().split(/\s+/); const n = t[0], p = t.slice(1);
+  const d = {tap:"", hold:"", kind:"key", text:""};
+  switch(n){
+    case "trans": d.kind="trans"; d.tap="▽"; d.text="下のレイヤーのキーをそのまま使う（透過）"; break;
+    case "none": d.kind="none"; d.tap=""; d.text="何もしない"; break;
+    case "kp": d.tap=keyLabel(p[0]); d.text=keyExplain(p[0])+" を入力"; break;
+    case "mt": d.tap=keyLabel(p[1]); d.hold=keyLabel(p[0]); d.text=`短押し: ${keyExplain(p[1])} / 長押し: ${MODNAME[norm(p[0])]||keyExplain(p[0])}`; break;
+    case "lt": d.tap=keyLabel(p[1]); d.hold="L"+p[0]; d.text=`短押し: ${keyExplain(p[1])} / 長押し: レイヤー${p[0]}`; break;
+    case "lt_kana": d.tap=keyLabel(p[1]); d.hold="L"+p[0]; d.text=`短押し: ${keyExplain(p[1])}（日本語モードON） / 長押し: レイヤー${p[0]}`; break;
+    case "lt_eisu": d.tap=keyLabel(p[1]); d.hold="L"+p[0]; d.text=`短押し: ${keyExplain(p[1])}（日本語モードOFF） / 長押し: レイヤー${p[0]}`; break;
+    case "mo": d.tap="L"+p[0]; d.kind="layer"; d.text=`押している間レイヤー${p[0]}`; break;
+    case "to": d.tap="→L"+p[0]; d.kind="layer"; d.text=`レイヤー${p[0]}に切り替える`; break;
+    case "tog": d.tap="L"+p[0]+"⇄"; d.kind="layer"; d.text=`レイヤー${p[0]}をオン/オフ`; break;
+    case "sl": d.tap="L"+p[0]+"1回"; d.kind="layer"; d.text=`次の1キーだけレイヤー${p[0]}`; break;
+    case "bt": if (p[0]==="BT_SEL"){ d.tap="BT "+p[1]; d.text=`Bluetooth 接続先${p[1]}に切替`; } else if (p[0]==="BT_CLR"){ d.tap="BT消去"; d.text="いま選んでいる接続先のペアリングを消す"; } else if (p[0]==="BT_CLR_ALL"){ d.tap="BT全消去"; d.text="5つ全部のペアリングを消す"; } else { d.tap=p.join(" "); d.text="Bluetooth操作"; } d.kind="sys"; break;
+    case "mkp": d.tap=MB[p[0]]||p[0]; d.text=(MB[p[0]]||p[0])+"（マウスボタン）"; break;
+    case "msc": d.tap=SCRL[p[0]]||p[0]; d.text=SCRL[p[0]]||p[0]; break;
+    case "mmv": d.tap="カーソル"; d.text="カーソル移動 "+p.join(" "); break;
+    case "bootloader": d.tap="BOOT"; d.kind="sys"; d.text="書き込みモード（ブートローダー）に入る"; break;
+    case "sys_reset": d.tap="RESET"; d.kind="sys"; d.text="再起動"; break;
+    case "studio_unlock": d.tap="Studio解除"; d.kind="sys"; d.text="DYA Studio からの変更を許可する"; break;
+    case "caps_word": d.tap="CapsW"; d.text="次の単語だけ大文字"; break;
+    case "key_repeat": d.tap="Rep"; d.text="直前のキーを繰り返す"; break;
+    default:
+      if (DATA.macros.includes(n)){ d.tap=MACRO_JA[n]||n; d.kind="macro"; d.text=`マクロ「${n}」`+(p.length?" "+p.join(" "):""); }
+      else { d.tap=n+(p.length?" "+p.join(" "):""); d.text=`カスタム動作 ${n}`; }
+  }
+  return d;
+}
+
+/* ---------- 物理位置 ---------- */
+function geom(pos){
+  // 0..29: 3行×10（左5+右5）、30..35: 4行目左（6キー）、36..40: 4行目右（5キー）
+  let row, col, hand, colInHand, hasThumb=false;
+  if (pos < 30){ row = Math.floor(pos/10); const c = pos%10; hand = c<5?"左":"右"; colInHand = c%5; col = c<5 ? c+1 : c+3; }
+  else { row = 3; if (pos<36){ hand="左"; colInHand=pos-30; col=colInHand+1; hasThumb = pos===35; } else { hand="右"; colInHand=pos-36; col=colInHand+8; } }
+  return {row, col, hand, colInHand, hasThumb};
+}
+function posName(pos){ const g=geom(pos); return `${g.hand}手 ${g.row+1}段目 ${g.colInHand+1}列目${g.hasThumb?"（親指）":""}`; }
+
+/* ---------- 状態 ---------- */
+const state = {layer:0, sel:null, edits:{}, db:null, local:false};
+const $ = (s)=>document.querySelector(s);
+const editId = (l,p)=>`l${l}-p${p}`;
+const LS_KEY = "frostortho-keymap-edits";
+
+function loadLocal(){ try{ const raw=localStorage.getItem(LS_KEY); if(raw){ const o=JSON.parse(raw); state.edits=o.edits||{}; if(!$("#general").matches(":focus")) $("#general").value=o.general||""; } }catch(e){} }
+function saveLocal(){ try{ localStorage.setItem(LS_KEY, JSON.stringify({edits:state.edits, general:$("#general").value})); }catch(e){} }
+
+/* ---------- 描画 ---------- */
+function renderHeader(){
+  $("#sub").textContent = `${DATA.branch} ブランチ（${DATA.commit}）・${DATA.generated} 時点の内容 ・ 表記は JIS 配列 / Mac の記号`;
+  $("#foot").innerHTML = `定義済みのマクロ: ${DATA.macros.map(m=>`<code>&amp;${m}</code>`).join("、")||"なし"} ／ 独自ビヘイビア: ${DATA.behaviors.map(m=>`<code>&amp;${m}</code>`).join("、")||"なし"}<br>レイヤー5・6・7の番号は overlay 側（スクロール・AML）から参照されているので、番号の入れ替えは避けてください。`;
+}
+function pendingCount(layer){ return Object.values(state.edits).filter(e=>e.layer===layer && e.status!=="applied").length; }
+function renderTabs(){
+  const t = $("#tabs"); t.innerHTML="";
+  DATA.layers.forEach((l,i)=>{
+    const b=document.createElement("button"); b.className="tab"; b.role="tab"; b.id="tab-"+i; b.setAttribute("aria-selected", String(i===state.layer));
+    const c = pendingCount(i);
+    b.innerHTML = `<span class="n">${i}</span><span>${l.label}</span>${c?`<span class="badge">${c}</span>`:""}`;
+    b.addEventListener("click",()=>{ state.layer=i; state.sel=null; renderAll(); });
+    t.appendChild(b);
+  });
+}
+function renderGrid(){
+  const L = DATA.layers[state.layer]; const g=$("#grid"); g.innerHTML="";
+  $("#layerTitle").textContent = `レイヤー${state.layer} ${L.label}`;
+  $("#layerDesc").textContent = L.desc;
+  L.bindings.forEach((b,pos)=>{
+    const e = state.edits[editId(state.layer,pos)]; const pending = e && e.status!=="applied";
+    const shown = pending && e.binding ? e.binding : b;
+    const d = describe(shown); const gm = geom(pos);
+    const k=document.createElement("button"); k.type="button";
+    k.className = "key" + (d.kind==="trans"?" trans":"") + (d.kind==="none"?" none":"") + (pending&&e.binding?" edited":"") + (pending&&e.note?" noted":"") + (state.sel===pos?" sel":"");
+    k.style.gridRow = String(gm.row+1); k.style.gridColumn = String(gm.col);
+    k.dataset.pos = pos;
+    const tapLen = [...d.tap].length; const cls = tapLen>=6?" tiny":(tapLen>=3?" small":"");
+    k.innerHTML = `<span class="idx">${pos}</span><span class="tap${cls}">${esc(d.tap)}</span>` + (d.hold?`<span class="hold">${esc(d.hold)}</span>`:"") + (pending&&e.binding?`<span class="old">${esc(describe(b).tap||"—")}</span>`:"") + (state.layer===6 && DATA.amlKeep.includes(pos)?`<span class="aml">AML</span>`:"");
+    k.setAttribute("aria-label", `位置${pos} ${posName(pos)}: ${d.text}` + (pending?"（変更あり）":""));
+    k.title = shown + (pending&&e.note?`\nメモ: ${e.note}`:"");
+    k.addEventListener("click",()=>{ state.sel = (state.sel===pos)?null:pos; renderGrid(); renderEditor(); });
+    g.appendChild(k);
+  });
+  const s = L.sensor.map(x=>{ const d=describe(x); return d.text||d.tap; });
+  $("#encoder").textContent = L.sensor.length ? `${L.sensor[0]}（${sensorJa(L.sensor[0])}）` : "なし";
+}
+function sensorJa(b){ const n=b.replace(/^&/,"").split(/\s+/)[0]; return ({scroll_up_down:"縦スクロール", vol_up_down:"音量", rsr_vol:"音量（DYA Studioで変更可）", rsr_trans:"下のレイヤーと同じ"})[n] || describe(b).text; }
+function esc(s){ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]); }
+
+const CHIPS = [
+  ["よく使う", ["&trans","&none","&kp ESC","&kp TAB","&kp ENTER","&kp SPACE","&kp BSPC","&kp DEL","&kp LANG1","&kp LANG2"]],
+  ["修飾キー", ["&kp LSHIFT","&kp LCTRL","&kp LALT","&kp LGUI","&mt LSHIFT A","&mt LCTRL A","&mt LGUI A"]],
+  ["レイヤー", ["&mo 1","&lt 1 A","&to 0","&tog 1"]],
+  ["ショートカット", ["&kp LG(C)","&kp LG(V)","&kp LG(Z)","&kp LG(LS(Z))","&kp LC(C)","&kp LC(V)"]],
+  ["マウス・スクロール", ["&mkp MB1","&mkp MB2","&mkp MB3","&msc SCRL_UP","&msc SCRL_DOWN"]],
+  ["メディア", ["&kp C_VOL_UP","&kp C_VOL_DN","&kp C_MUTE","&kp C_PP","&kp C_BRI_UP","&kp C_BRI_DN"]],
+  ["矢印ほか", ["&kp UP","&kp DOWN","&kp LEFT","&kp RIGHT","&kp HOME","&kp END","&kp PG_UP","&kp PG_DN"]],
+];
+function renderEditor(){
+  const ed = $("#editor");
+  if (state.sel===null){ ed.innerHTML = `<h2>キーの変更</h2><p class="empty">左の配列からキーを押すと、ここで割り当てを変えられます。<br>ZMKの書き方が分からなくても、メモ欄に日本語で「こうしたい」を書いておけばこちらで直します。</p>`; return; }
+  const pos=state.sel, layer=state.layer, cur=DATA.layers[layer].bindings[pos], d=describe(cur), id=editId(layer,pos), e=state.edits[id];
+  ed.innerHTML = `
+    <h2>キーの変更</h2>
+    <p class="where">レイヤー${layer} ${esc(DATA.layers[layer].label)} ・ ${esc(posName(pos))} ・ 位置番号 ${pos}</p>
+    <div class="cur"><span class="big">${esc(d.tap||"—")}${d.hold?`<span class="hold" style="display:block;font-size:10px;font-weight:500;margin-top:4px;color:var(--muted)">${esc(d.hold)}</span>`:""}</span><div><p class="exp">${esc(d.text)}</p><code>${esc(cur)}</code></div></div>
+    <label class="f" for="bind">新しい割り当て（ZMKの書き方。分からなければ空のままでOK）</label>
+    <input id="bind" type="text" autocomplete="off" spellcheck="false" placeholder="例: &kp A / &mt LSHIFT Z / &lt 2 SPACE" value="${esc(e?.binding||"")}">
+    <details class="chips-wrap"><summary>書き方の候補を見る（押すと上の欄に入ります）</summary><div class="chips" id="chips"></div></details>
+    <p class="hint" id="preview"></p>
+    <label class="f" for="note">メモ・要望（日本語でOK）</label>
+    <textarea id="note" placeholder="例: ここにCmd+Shift+4のスクショを入れたい／このキーは使わないので消す">${esc(e?.note||"")}</textarea>
+    <div class="actions">
+      <button class="btn primary" id="save">保存</button>
+      ${e?`<button class="btn danger" id="revert">変更を取り消す</button>`:""}
+      <button class="btn quiet" id="close">閉じる</button>
+      <span class="status" id="editStatus">${e?(e.status==="applied"?"反映済み":"未反映の変更あり"):""}</span>
+    </div>`;
+  const chips=$("#chips");
+  CHIPS.forEach(([g,list])=>{ const gl=document.createElement("span"); gl.className="chip grp"; gl.textContent=g; chips.appendChild(gl); list.forEach(v=>{ const c=document.createElement("button"); c.type="button"; c.className="chip"; c.textContent=v; c.title=describe(v).text; c.addEventListener("click",()=>{ $("#bind").value=v; updatePreview(); $("#bind").focus(); }); chips.appendChild(c); }); });
+  $("#bind").addEventListener("input", updatePreview); updatePreview();
+  $("#save").addEventListener("click", saveEdit);
+  $("#close").addEventListener("click", ()=>{ state.sel=null; renderGrid(); renderEditor(); });
+  $("#revert")?.addEventListener("click", revertEdit);
+}
+function updatePreview(){
+  const v=$("#bind").value.trim(); const p=$("#preview");
+  if(!v){ p.textContent="割り当てを空にしてメモだけ保存することもできます。"; return; }
+  if(!v.startsWith("&")){ p.textContent="ZMKの割り当ては & で始まります（例: &kp A）。書き方が不明ならメモ欄へ。"; return; }
+  const d=describe(v); p.textContent = `この書き方だと: ${d.text}` + (d.hold?`（キーの表示: ${d.tap} / 長押し ${d.hold}）`:"");
+}
+async function saveEdit(){
+  const pos=state.sel, layer=state.layer, id=editId(layer,pos);
+  const binding=$("#bind").value.trim(), note=$("#note").value.trim(); const st=$("#editStatus");
+  if(!binding && !note){ st.className="status err"; st.textContent="割り当てかメモのどちらかを入れてください"; return; }
+  const doc={layer,pos,current:DATA.layers[layer].bindings[pos],binding,note,status:"pending",updatedAt:new Date().toISOString()};
+  st.className="status"; st.textContent="保存中…";
+  try{
+    if(state.db){ await state.db.doc("edits/"+id).set(doc); }
+    else { state.edits[id]=doc; saveLocal(); renderAll(); }
+    const s=$("#editStatus"); if(s){ s.className="status ok"; s.textContent="保存しました"; }
+  }catch(err){ st.className="status err"; st.textContent="保存できませんでした: "+(err?.message||err?.code||err); }
+}
+async function revertEdit(){
+  const id=editId(state.layer,state.sel);
+  try{ if(state.db){ await state.db.doc("edits/"+id).delete(); } else { delete state.edits[id]; saveLocal(); renderAll(); } }
+  catch(err){ const st=$("#editStatus"); st.className="status err"; st.textContent="取り消せませんでした: "+(err?.message||err); }
+}
+function renderChanges(){
+  const c=$("#changes"); const list=Object.values(state.edits).sort((a,b)=>(a.status==="applied")-(b.status==="applied") || a.layer-b.layer || a.pos-b.pos);
+  if(!list.length){ c.innerHTML=`<h2>変更リスト</h2><p class="none">まだ変更はありません。</p>`; return; }
+  const pend = list.filter(e=>e.status!=="applied").length;
+  c.innerHTML=`<h2>変更リスト <span style="font-weight:400;letter-spacing:0;text-transform:none">（未反映 ${pend} 件）</span></h2><ol></ol><div class="actions"><button class="btn" id="exportBtn">テキストで書き出す</button></div>`;
+  const ol=c.querySelector("ol");
+  list.forEach(e=>{
+    const li=document.createElement("li"); li.className = e.status==="applied"?"applied":""; li.tabIndex=0;
+    const now = describe(e.current||DATA.layers[e.layer].bindings[e.pos]).tap || "—";
+    const nw = e.binding ? `<code>${esc(e.binding)}</code>（${esc(describe(e.binding).tap)}）` : "<span style='color:var(--muted)'>割り当ては未定</span>";
+    li.innerHTML = `<span class="pos">L${e.layer} #${e.pos}</span><span class="what">${esc(now)} → ${nw}${e.note?`<span class="n">${esc(e.note)}</span>`:""}</span><span class="pill">${e.status==="applied"?"反映済み":"未反映"}</span>`;
+    const go=()=>{ state.layer=e.layer; state.sel=e.pos; renderAll(); document.getElementById("grid").scrollIntoView({behavior:"smooth",block:"nearest"}); };
+    li.addEventListener("click",go); li.addEventListener("keydown",ev=>{ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); go(); } });
+    ol.appendChild(li);
+  });
+  $("#exportBtn").addEventListener("click",()=>{
+    let pre=c.querySelector("pre"); if(pre){ pre.remove(); return; }
+    pre=document.createElement("pre");
+    pre.textContent = list.map(e=>`L${e.layer} #${e.pos} ${posName(e.pos)}: ${e.current} -> ${e.binding||"(未定)"}${e.note?`  // ${e.note}`:""}${e.status==="applied"?"  [反映済み]":""}`).join("\n") + ($("#general").value.trim()?`\n\n全体メモ:\n${$("#general").value.trim()}`:"");
+    c.appendChild(pre);
+  });
+}
+function renderAll(){ renderTabs(); renderGrid(); renderEditor(); renderChanges(); }
+
+/* ---------- 保存先（db）との接続 ---------- */
+function banner(msg){ const b=$("#banner"); b.textContent=msg; b.classList.toggle("show", !!msg); }
+async function connect(){
+  const use = (window.claude && typeof window.claude.use==="function") ? window.claude.use("db") : Promise.resolve(null);
+  const db = await use;
+  if(!db){ state.local=true; loadLocal(); renderAll(); banner("保存先に接続できないため、このブラウザ内にだけ保存します。書き出したテキストを送ってもらえれば反映できます。"); return; }
+  state.db=db;
+  db.collection("edits").onSnapshot(snap=>{
+    const next={}; snap.docs.forEach(d=>{ if(d.exists) next[d.id]=d.data(); }); state.edits=next; renderAll();
+  }, err=>{ banner("保存先との接続が切れました。ページを開き直してください。（"+err.code+"）"); });
+  db.doc("notes/general").onSnapshot(s=>{ const ta=$("#general"); if(s.exists && !ta.matches(":focus")) ta.value = s.data().text||""; });
+}
+$("#generalSave").addEventListener("click", async()=>{
+  const st=$("#generalStatus"); const text=$("#general").value.trim();
+  st.className="status"; st.textContent="保存中…";
+  try{ if(state.db){ await state.db.doc("notes/general").set({text, updatedAt:new Date().toISOString()}); } else { saveLocal(); } st.className="status ok"; st.textContent="保存しました"; }
+  catch(err){ st.className="status err"; st.textContent="保存できませんでした: "+(err?.message||err); }
+});
+
+renderHeader(); renderAll(); connect();
+</script>
