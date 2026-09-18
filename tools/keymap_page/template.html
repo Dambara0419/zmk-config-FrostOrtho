@@ -260,6 +260,7 @@ function describe(b){
     case "kp": d.tap=keyLabel(p[0]); d.text=keyExplain(p[0])+" を入力"; break;
     case "mt": d.tap=keyLabel(p[1]); d.hold=keyLabel(p[0]); d.text=`短押し: ${keyExplain(p[1])} / 長押し: ${MODNAME[norm(p[0])]||keyExplain(p[0])}`; break;
     case "lt": d.tap=keyLabel(p[1]); d.hold="L"+p[0]; d.text=`短押し: ${keyExplain(p[1])} / 長押し: レイヤー${p[0]}`; break;
+    case "lt_slash": d.tap="/"; d.hold="L"+p[0]; d.text=`短押し: /（Shiftを押しながらだと \\） / 長押し: レイヤー${p[0]}`; break;
     case "lt_kana": d.tap=keyLabel(p[1]); d.hold="L"+p[0]; d.text=`短押し: ${keyExplain(p[1])}（日本語モードON） / 長押し: レイヤー${p[0]}`; break;
     case "lt_eisu": d.tap=keyLabel(p[1]); d.hold="L"+p[0]; d.text=`短押し: ${keyExplain(p[1])}（日本語モードOFF） / 長押し: レイヤー${p[0]}`; break;
     case "mo": d.tap="L"+p[0]; d.kind="layer"; d.text=`押している間レイヤー${p[0]}`; break;

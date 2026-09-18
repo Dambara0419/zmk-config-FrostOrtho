@@ -100,6 +100,21 @@
             bindings = <&mo>, <&eisu_off>;
             label = "LT_EISU";
         };
+        // 「/」キー: 通常は /、Shift を押しながらだと \（Mac の JIS では Option+¥ が \）
+        slash_bslh: slash_bslh {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp SLASH>, <&kp LA(INT_YEN)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        lt_slash: lt_slash {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&slash_bslh>;
+            label = "LT_SLASH";
+        };
         lt_to_layer_0: lt_to_layer_0 {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_TO_0";
@@ -145,9 +160,9 @@
         default_layer {
             bindings = <
 &kp Q                 &kp W         &kp E         &kp R             &kp T                         &kp Y        &kp U          &kp I      &kp O         &kp P
-&kp A                 &kp S         &kp D         &kp F             &kp G                         &kp H        &kp J          &kp K      &kp L         &lt 5 MINUS
-&mt LEFT_SHIFT Z      &kp X         &kp C         &kp V             &kp B                         &kp BACKSPACE  &kp N          &kp M      &kp PERIOD    &lt 7 SLASH
-&mt LEFT_CONTROL TAB  &kp LEFT_WIN  &kp LEFT_ALT  &lt_eisu 7 LANG_HANJA  &lt 2 SPACE  &lt_kana 3 LANG1      &lt 1 ENTER    &kp BACKSPACE  &kp COMMA  &lt 4 F10     &mt RIGHT_SHIFT INTERNATIONAL_1
+&kp A                 &kp S         &kp D         &kp F             &kp G                         &kp H        &kp J          &kp K      &kp L         &lt 5 BACKSPACE
+&mt LEFT_SHIFT Z      &kp X         &kp C         &kp V             &kp B                         &kp BACKSPACE  &kp N          &kp M      &kp PERIOD    &lt_slash 7 0
+&mt LEFT_CONTROL TAB  &kp LEFT_WIN  &kp LEFT_ALT  &lt_eisu 7 LANG_HANJA  &lt 2 SPACE  &lt_kana 3 LANG1      &lt 1 ENTER    &kp BACKSPACE  &kp COMMA  &lt 4 F10     &mt RIGHT_SHIFT TAB
             >;
 
             sensor-bindings = <&scroll_up_down &rsr_trans>;
